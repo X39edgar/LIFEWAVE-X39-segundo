@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Formulario LifeWave X39</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom right, #ebf8ff, #bee3f8);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+    .form-container {
+      background: white;
+      padding: 2rem;
+      border-radius: 1.5rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      max-width: 500px;
+      width: 100%;
+    }
+    h2 {
+      color: #2b6cb0;
+      text-align: center;
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      margin-top: 1rem;
+      font-weight: bold;
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #cbd5e0;
+      border-radius: 0.5rem;
+      margin-top: 0.25rem;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 1.5rem;
+      width: 100%;
+      padding: 0.75rem;
+      background-color: #2b6cb0;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 0.5rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    button:hover {
+      background-color: #2c5282;
+    }
+    .thank-you {
+      text-align: center;
+      color: #2f855a;
+    }
+    .link {
+      display: inline-block;
+      margin-top: 1rem;
+      color: white;
+      background: #2b6cb0;
+      padding: 0.5rem 1rem;
+      border-radius: 9999px;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container" id="formBox">
+    <form id="x39Form">
+      <h2>¿Has probado el parche X39? ¡Queremos tu opinión!</h2>
+
+      <label for="name">Nombre completo</label>
+      <input type="text" id="name" name="name" required />
+
+      <label for="experience">¿Cómo describirías tu experiencia?</label>
+      <textarea id="experience" name="experience" required></textarea>
+
+      <label for="change">¿Notaste algún cambio positivo? ¿Cuál?</label>
+      <textarea id="change" name="change"></textarea>
+
+      <label for="rating">¿Cómo lo calificarías del 1 al 5?</label>
+      <select id="rating" name="rating" required>
+        <option value="">Selecciona</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+      </select>
+
+      <label>¿Deseas que te contactemos?</label>
+      <select id="contactChoice" name="contactChoice" required>
+        <option value="">Selecciona</option>
+        <option value="sí">Sí</option>
+        <option value="no">No</option>
+      </select>
+
+      <div id="contactField" style="display: none;">
+        <label for="contact">Correo o WhatsApp</label>
+        <input type="text" id="contact" name="contact" />
+      </div>
+
+      <button type="submit">Enviar opinión</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('x39Form');
+    const contactChoice = document.getElementById('contactChoice');
+    const contactField = document.getElementById('contactField');
+    const formBox = document.getElementById('formBox');
+
+    contactChoice.addEventListener('change', () => {
+      contactField.style.display = contactChoice.value === 'sí' ? 'block' : 'none';
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      const formData = new FormData(form);
+      console.log(Object.fromEntries(formData));
+
+      formBox.innerHTML = `
+        <div class="thank-you">
+          <h2>¡Gracias por tu retroalimentación!</h2>
+          <p>Si deseas más información, visita el siguiente enlace:</p>
+          <a href="https://backoffice.lifewave.com" target="_blank" class="link">Ir a LifeWave</a>
+        </div>
+      `;
+    });
+  </script>
+</body>
+</html>
